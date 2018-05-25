@@ -1,0 +1,26 @@
+{
+  "name": "jus-project",
+  "version": "0.0.1",
+  "description": "Dev ability assessment - just.com.br",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/rafaelsmaciel/jus-project.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Rafael Maciel",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/rafaelsmaciel/jus-project#readme",
+  "dependencies": {
+    "next": "^6.0.3",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0"
+  }
+}
