@@ -16,7 +16,7 @@ function getPosts () {
 
 const PostLink = ({ post }) => (
   <li className={ css( styles.listItem )}>
-    <Link as={`/p/${post.id}`} href={`/post?title=${post.title}`}>
+    <Link prefetch as={`/p/${post.id}`} href={`/post?title=${post.title}`}>
       <a className={ css( styles.anchor )}>{post.title}</a>
     </Link>
   </li>
@@ -42,7 +42,8 @@ Index.propTypes = {
 
 const styles = StyleSheet.create({
   typography: {
-    fontFamily: 'Arial'
+    fontFamily: 'Arial',
+    fontSize: 'calc(10px * 3 + 1vw)'
   },
 
   list: {
