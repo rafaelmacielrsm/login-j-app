@@ -3,22 +3,10 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
 import reducer from './reducers';
 
-
-const exampleInitialState = {
-  auth: {
-    user: {
-      identifier: '',
-      name: '',
-      email: ''
-    },
-    isAuthenticated: false
-  }
-};
-
-export function initializeStore( initialState = exampleInitialState ){
+export function initializeStore(initialState){
   return createStore( 
     reducer, 
-    initialState, 
+    initialState,
     composeWithDevTools(applyMiddleware(thunkMiddleware))
   );
 }
