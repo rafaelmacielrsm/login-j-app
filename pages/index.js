@@ -1,6 +1,10 @@
 import Layout from '../components/MyLayout.js';
 import Link from 'next/link';
 import { StyleSheet, css } from 'aphrodite';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { loginUser, logoutUser } from '../store';
 
 function getPosts () {
   return [
@@ -18,7 +22,7 @@ const PostLink = ({ post }) => (
   </li>
 );
 
-export default () => (
+const Index = ({ loginAction, logoutAction }) => (
   <Layout>
     <h1 className={ css( styles.typography )}>My Blog</h1>
     <ul className={ css( styles.list )}  >
@@ -26,8 +30,15 @@ export default () => (
         <PostLink key={post.id} post={post}/>
       ))}
     </ul>
+
+    <button onClick={ loginAction }>Login</button>
+    <button onClick={ logoutAction }>Logout</button>
   </Layout>
 );
+
+Index.propTypes = {
+  loginAction: PropTypes.func.isRequired
+};
 
 const styles = StyleSheet.create({
   typography: {
@@ -51,3 +62,23 @@ const styles = StyleSheet.create({
     }
   }
 });
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginAction: () => {      
+      dispatch(loginUser());
+    },
+    logoutAction: () => {
+      dispatch(logoutUser());
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Index);
+
