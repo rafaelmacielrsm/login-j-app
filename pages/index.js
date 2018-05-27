@@ -4,7 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loginUser, logoutUser } from '../store';
+import { loginUser, logoutUser } from '../store/actions';
 
 function getPosts () {
   return [
@@ -73,7 +73,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     loginAction: () => {      
-      dispatch(loginUser());
+      dispatch(
+        loginUser({ 
+          name: 'test',
+          email: 'example@test.com',
+          identifier: '123'
+        }));
     },
     logoutAction: () => {
       dispatch(logoutUser());
