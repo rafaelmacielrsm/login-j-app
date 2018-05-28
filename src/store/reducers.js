@@ -23,11 +23,35 @@ const isAuthenticated = ( state = false, action ) => {
   }
 };
 
+const errors = ( state = [], action ) => {
+  switch ( action.type ) {
+  case C.ADD_ERROR:
+    return [action.payload, ...state];
+  case C.CLEAR_ERROR:
+    return state.filter((value, index) => index !== action.payload);
+  default:
+    return state;
+  }
+};
+
+const fetching = ( state = false, action ) => {
+  switch ( action.type ) {
+  case C.FETCHING:
+    return true;
+  case C.CANCEL_FETCHING:
+    return false;
+  default:
+    return state;
+  }
+};
+
 
 const reducer = combineReducers({
   auth: combineReducers({
     user, isAuthenticated
-  })
+  }),
+  errors,
+  fetching
 });
 
 export default reducer;

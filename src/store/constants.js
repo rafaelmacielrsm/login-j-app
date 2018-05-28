@@ -2,8 +2,9 @@ const constants = {
   LOGIN: 'LOGIN',
   LOGOUT: 'LOGOUT',
   FETCHING: 'FETCHING',
-  SET_ERRORS: 'SET_ERRORS',
-  CLEAR_ERROR: 'CLEAR_ERROR'
+  ADD_ERROR: 'ADD_ERROR',
+  CLEAR_ERROR: 'CLEAR_ERROR',
+  CANCEL_FETCHING: 'STOP_FETCHING'
 };
 
 export default constants;

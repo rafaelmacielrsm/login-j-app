@@ -21,14 +21,17 @@
   "dependencies": {
     "aphrodite": "^2.2.1",
     "express": "^4.16.3",
+    "lodash": "^4.17.10",
     "next": "^6.0.3",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "validator": "^10.2.0"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.3",
     "eslint": "^4.19.1",
     "eslint-plugin-react": "^7.8.2",
     "redux-devtools-extension": "^2.13.2"

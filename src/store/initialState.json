@@ -6,5 +6,7 @@
       "email": ""
     },
     "isAuthenticated": false
-  }
+  },
+  "errors": [],
+  "fetching": false
 }

@@ -30,7 +30,7 @@ export default class MyDocument extends Document {
           <title>My page</title>
           <style data-aphrodite dangerouslySetInnerHTML={{ __html: this.props.css.content }} />
         </Head>
-        <body>
+        <body style={{ margin: 0, padding: 0 }}>
           <Main />
           <NextScript />
         </body>

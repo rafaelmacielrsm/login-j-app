@@ -4,14 +4,8 @@ import { loginUser } from '../../store/actions';
 
 const mapDispatchToProps = ( dispatch ) => {
   return {
-    handleLoginUser: (  ) => {
-      const stubUser = {
-        name: 'test',
-        email: 'test@example.com',
-        identifier: '321'
-      };
-      
-      return dispatch( loginUser( stubUser ));
+    handleLogin: ( email, password ) => {
+      return dispatch( loginUser( email, password ));
     }
   };
 };
