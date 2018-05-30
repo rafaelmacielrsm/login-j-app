@@ -27,7 +27,9 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <title>My page</title>
+          <meta charset="UTF-8"/>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+          <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
           <style data-aphrodite dangerouslySetInnerHTML={{ __html: this.props.css.content }} />
         </Head>
         <body style={{ margin: 0, padding: 0 }}>
