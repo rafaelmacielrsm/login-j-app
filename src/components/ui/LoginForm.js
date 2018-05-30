@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 import isEmail from 'validator/lib/isEmail';
 import debounce from 'lodash/debounce';
+import Label from './shared/FormLabel';
+import { defaultInput } from './assets/common';
 
 class LoginForm extends React.Component {
   constructor(props){
@@ -66,6 +68,8 @@ class LoginForm extends React.Component {
           <Label targetId="emailInput">Email</Label>
 
           <input 
+            autoComplete="off"
+            className={ css( styles.input )}
             id="emailInput"
             onChange={ debounce(this.validateInputs, 400) }
             ref={(el) => this.emailInput = el}
@@ -78,6 +82,8 @@ class LoginForm extends React.Component {
           <Label targetId="passwordInput">Password</Label>
 
           <input 
+            autoComplete="off"
+            className={ css( styles.input )}            
             id="passwordInput"
             onChange={ debounce(this.validateInputs, 400) }
             ref={(el) => this.passwordInput = el}
@@ -99,15 +105,6 @@ class LoginForm extends React.Component {
   }
 }
 
-const Label = ({ targetId, ...props }) => (
-  <label 
-    className={ css( styles.label ) } 
-    htmlFor={ targetId }>
-  
-    { props.children }
-  </label>
-);
-
 LoginForm.propTypes = {
   handleLogin: PropTypes.func.isRequired
 };
@@ -116,7 +113,7 @@ const styles = StyleSheet.create({
   loginForm: {
     border: '1px solid black',
     boxSizing: 'border-box',
-    margin: '0 0 10% 0',
+    margin: '0',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -132,10 +129,7 @@ const styles = StyleSheet.create({
     marginBottom: '1em'
   },
 
-  label: {
-    width: '100%',
-    textAlign: 'left'
-  }
+  input: defaultInput,
 });
 
 export default LoginForm;

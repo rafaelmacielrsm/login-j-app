@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite/no-important';
+import { colorPallet } from '../assets/common';
 
 const Loader = () => {
   return(
@@ -15,6 +16,34 @@ const styles = StyleSheet.create({
     position: 'fixed',
     overflow: 'hidden',
     backgroundColor: '#FFF',
+    animationName: {
+      '0%': {
+        top: '-5%', 
+        opacity: 0
+      },
+
+      '25%': {
+        top: 0,
+        opacity: 0.25
+      },
+
+      '50%': {
+        opacity: 0.5
+      },
+
+      '75%': {
+        opacity: 0.75
+      },
+    
+      '100%': {
+        top: 0,
+        opacity: 1
+      },
+    },
+    animationDuration: '1s',
+    animationIterationCount: '1',
+    animationTimingFunction: 'linear',
+
     ':before': {
       display: 'block',
       position: 'absolute',
@@ -22,16 +51,11 @@ const styles = StyleSheet.create({
       left: -200,
       width: '20vw',
       height: 4,
-      backgroundColor: '#F00',
+      backgroundColor: colorPallet.alert,
       animationName: {
         'from': {
           left: '-20%', 
-        },
-      
-        '50%': {
-          left: '50%'
-        },
-      
+        },      
         'to': {
           left: '120%'
         }

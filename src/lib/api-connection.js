@@ -12,3 +12,17 @@ export const loginRequest = ( email, password ) => (
     }
   )
 );
+
+export const createUserRequest = ( dataObj ) => (
+  fetch(
+    serverURI( '/1.0/usuarios' ),
+    {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json',     
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({ user: dataObj })
+    }
+  )
+);
