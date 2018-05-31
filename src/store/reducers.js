@@ -23,11 +23,11 @@ const isAuthenticated = ( state = false, action ) => {
   }
 };
 
-const errors = ( state = [], action ) => {
+const alerts = ( state = [], action ) => {
   switch ( action.type ) {
-  case C.ADD_ERROR:
+  case C.ADD_ALERT:
     return [action.payload, ...state];
-  case C.CLEAR_ERROR:
+  case C.CLEAR_ALERT:
     return state.filter((value, index) => index !== action.payload);
   default:
     return state;
@@ -50,7 +50,7 @@ const reducer = combineReducers({
   auth: combineReducers({
     user, isAuthenticated
   }),
-  errors,
+  alerts,
   fetching
 });
 

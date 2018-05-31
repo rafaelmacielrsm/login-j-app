@@ -35,10 +35,10 @@ export const cancelFetching = () => ( dispatch, getState ) => {
   }
 };
 
-export const addErrorMessage = ( message ) => ( dispatch ) => {
-  return dispatch({ type: C.ADD_ERROR, payload: message });
+export const addAlertMessage = ( message ) => ( dispatch ) => {
+  return dispatch({ type: C.ADD_ALERT, payload: message });
 };
 
-export const removeErrorMessage = ( index ) => ( dispatch ) => {
-  return dispatch({ type: C.CLEAR_ERROR, payload: index });
+export const removeAlertMessage = ( index ) => ( dispatch ) => {
+  return dispatch({ type: C.CLEAR_ALERT, payload: index });
 };

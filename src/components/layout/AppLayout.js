@@ -4,7 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 import Loader from '../ui/shared/Loader';
 import Alert from '../ui/shared/Alert';
 import { connect } from 'react-redux';
-import { removeErrorMessage } from '../../store/actions';
+import { removeAlertMessage } from '../../store/actions';
 
 const AppLayout = (props) => {
   return(
@@ -12,9 +12,9 @@ const AppLayout = (props) => {
       className={ css(styles.mainContainer) }>
       { props.isFetching && <Loader /> }
 
-      { props.errors.length > 0 && 
+      { props.alerts.length > 0 && 
         <Alert 
-          message={ props.errors[0] } 
+          message={ props.alerts[0] } 
           handleClick={ props.handleAlertClick }/> }
 
       { props.children }
@@ -52,14 +52,14 @@ const styles = StyleSheet.create({
 const mapStateToProps = ( state ) => {
   return { 
     isFetching: state.fetching,
-    errors: state.errors
+    alerts: state.alerts
   };
 };
 
 const mapDispatchToProps = ( dispatch ) => {
   return { 
     handleAlertClick: () => {
-      return dispatch( removeErrorMessage( 0 ));
+      return dispatch( removeAlertMessage( 0 ));
     }
   };
 };

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import LoginForm from '../ui/LoginForm';
-import { loginUser, cancelFetching, addErrorMessage } from '../../store/actions';
+import { loginUser, cancelFetching, addAlertMessage } from '../../store/actions';
 
 const mapStateToProps = ( state ) => {
   return {
@@ -17,7 +17,7 @@ const mapDispatchToProps = ( dispatch ) => {
       return dispatch( cancelFetching() );
     },
     handleResponseError: ( errorMessage ) => {
-      return dispatch( addErrorMessage( errorMessage ));
+      return dispatch( addAlertMessage( errorMessage ));
     }
   };
 };

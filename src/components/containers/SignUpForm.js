@@ -3,7 +3,7 @@ import SignUpForm from '../ui/SignUpForm';
 import { 
   createUser, 
   cancelFetching, 
-  addErrorMessage } from '../../store/actions';
+  addAlertMessage } from '../../store/actions';
 
 const mapStateToProps = ( state ) => {
   return {
@@ -20,7 +20,7 @@ const mapDispatchToProps = ( dispatch ) => {
       return dispatch( cancelFetching() );
     },
     handleResponseError: ( errorMessage ) => {
-      return dispatch( addErrorMessage( errorMessage ));
+      return dispatch( addAlertMessage( errorMessage ));
     }
   };
 };

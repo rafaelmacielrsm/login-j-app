@@ -7,6 +7,6 @@
     },
     "isAuthenticated": false
   },
-  "errors": [],
+  "alerts": [],
   "fetching": false
 }

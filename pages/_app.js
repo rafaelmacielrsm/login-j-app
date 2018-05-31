@@ -5,8 +5,9 @@ import { Provider } from 'react-redux';
 
 const saveState = () => {
   /* eslint-disable no-undef */
-  const state = JSON.stringify(__NEXT_REDUX_STORE__.getState());
-  localStorage['redux-store'] = state;
+  const { auth } = __NEXT_REDUX_STORE__.getState();
+  const snapshot = JSON.stringify({ auth });
+  localStorage['redux-store'] = snapshot;
   /* eslint-enable no-undef */
 };
 
