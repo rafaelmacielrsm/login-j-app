@@ -5,7 +5,7 @@ const locales = {
     error: {
       invalid_email: 'Não é um email válido',
       required: 'Campo obrigatório',
-      network: 'Falha de Conexão, tente novamente em alguns momentos',
+      network: 'Falha na Conexão, tente novamente em alguns momentos',
       short: ( minimum ) => `Tamanho mínimo: ${minimum}`,
       invalid_format: ( format ) => `Formato: ${format}`,
     },
@@ -15,12 +15,22 @@ const locales = {
       password: 'Senha',
       phone_number: 'Número de Telefone',
       button: {
-        register: 'Registrar',
+        register: 'Cadastrar',
+        login: 'Acessar'
       }
+    },
+    link: {
+      has_account: 'Já possui conta? ',
+      login: 'Acesse aqui. ',
+      no_account: 'Não possui Cadastro? ',
+      signup: 'Cadastre aqui. ',
     },
     page: {
       signup: {
-        title: 'Registre uma Conta'
+        title: 'Cadastre uma Conta'
+      },
+      login: {
+        title: 'Bem Vindo',
       },
     },
   }

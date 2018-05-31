@@ -1,15 +1,27 @@
 import { connect } from 'react-redux';
 import LoginForm from '../ui/LoginForm';
-import { loginUser } from '../../store/actions';
+import { loginUser, cancelFetching, addErrorMessage } from '../../store/actions';
+
+const mapStateToProps = ( state ) => {
+  return {
+    isFetching: state.fetching
+  };
+};
 
 const mapDispatchToProps = ( dispatch ) => {
   return {
     handleLogin: ( email, password ) => {
       return dispatch( loginUser( email, password ));
+    },
+    handleResponseReceived: () => {
+      return dispatch( cancelFetching() );
+    },
+    handleResponseError: ( errorMessage ) => {
+      return dispatch( addErrorMessage( errorMessage ));
     }
   };
 };
 
-const Container = connect(null, mapDispatchToProps)(LoginForm);
+const Container = connect(mapStateToProps, mapDispatchToProps)(LoginForm);
 
 export default Container;

@@ -1,16 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import { StyleSheet, css } from 'aphrodite';
 import isEmail from 'validator/lib/isEmail';
-import debounce from 'lodash/debounce';
-import Label from './shared/FormLabel';
-import { defaultInput } from './assets/common';
+import t from '../../config/locales';
+import DefaultInput from './shared/DefaultInput';
+import PasswordInput from './shared/PasswordInput';
+import { 
+  defaultButton, 
+  primaryCard, 
+  defaultLink,
+  colorPallet } from './assets/common';
 
 class LoginForm extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       isValid: false,
+      isRevealingPassord: false,
       errors: { 
         email: '',
         password: '',
@@ -20,10 +27,15 @@ class LoginForm extends React.Component {
     this.emailInput = null;
     this.passwordInput = null;
     this.validateInputs = this.validateInputs.bind(this);
-    this.onLoginSubmit = this.onLoginSubmit.bind(this);
+    this.onSubmitForm = this.onSubmitForm.bind(this);
+    this.onRevealField = this.onRevealField.bind(this);
   }
 
-  validateInputs = () => {
+  onRevealField = () => {
+    this.setState({ isRevealingPassord: !this.state.isRevealingPassord });
+  }
+
+  validateInputs = () => {    
     let errors = {};
     let hasEmptyValues;
     const [email, password] = [ this.emailInput.value, this.passwordInput.value];
@@ -31,7 +43,7 @@ class LoginForm extends React.Component {
     hasEmptyValues = (email === '' || password === ''); 
 
     if ( !isEmail( email ) && email !== '' ) {
-      errors['email'] = 'Not a valid email';
+      errors['email'] = t( 'error.invalid_email' );
     }
 
     this.setState({ 
@@ -40,65 +52,64 @@ class LoginForm extends React.Component {
     });
   } 
 
-  onLoginSubmit = (ev) => {
+  onSubmitForm = (ev) => {
     ev.preventDefault();
 
     const [email, password] = [ this.emailInput.value, this.passwordInput.value];
 
     this.props.handleLogin( email, password )
-      .then(response => {
-        if (response.status == 401) {
-          alert('#TODO unauthorized');
-        }else{
-          alert('something');
+      .then(async (response) => {
+        this.props.handleResponseReceived();
+
+        const { status } = response;
+        const data = await response.json();
+
+        if (status == 401) {
+          this.props.handleResponseError(data.message);
         }
       })
-      .catch(() => alert('#TODO disconect'));
+      .catch(() => this.props.handleResponseError( t('error.network')));
   }
 
   render() {
-    const { errors, isValid } = this.state;
+    const { errors, isValid, isRevealingPassord } = this.state;
     return (
       <form className={ css(styles.loginForm) }>
         <section>
-          <h1>Login</h1>
+          <h1 className={ css( styles.heading )} >{ t( 'page.login.title' ) }</h1>
         </section>
 
-        <section className={ css(styles.inputGroup) }>
-          <Label targetId="emailInput">Email</Label>
-
-          <input 
-            autoComplete="off"
-            className={ css( styles.input )}
-            id="emailInput"
-            onChange={ debounce(this.validateInputs, 400) }
-            ref={(el) => this.emailInput = el}
-            type="text" />
+        <DefaultInput 
+          htmlID='email'
+          labelText={ t( 'label.email' ) }
+          errorMessage={ errors.email }
+          onChangeHandle={ this.validateInputs }
+          refInput={ (el) => this.emailInput = el } />
           
-          { errors.email && <span>{ errors.email }</span> }    
-        </section>
+        <PasswordInput 
+          htmlID='password'
+          labelText={ t( 'label.password' ) }
+          isRevealing ={ isRevealingPassord }
+          errorMessage={ errors.password }
+          onChangeHandle={ this.validateInputs }
+          revealFieldHandle={ this.onRevealField }
+          refInput={ (el) => this.passwordInput = el } />
 
-        <section className={ css(styles.inputGroup) }>
-          <Label targetId="passwordInput">Password</Label>
-
-          <input 
-            autoComplete="off"
-            className={ css( styles.input )}            
-            id="passwordInput"
-            onChange={ debounce(this.validateInputs, 400) }
-            ref={(el) => this.passwordInput = el}
-            type="password" />
-
-          { errors.password && <span>{ errors.password }</span> }
-        </section>
-
-        <section>
+        <section className={ css( styles.formActions )} >
           <button 
-            disabled={ !isValid }
-            onClick={ ev => this.onLoginSubmit(ev) }>
+            className={ css( styles.button )} 
+            disabled={ !isValid || this.props.isFetching }
+            onClick={ this.onSubmitForm }> 
             
-            login
+            { t( 'label.button.login' )}
           </button>
+
+          <span className={ css( styles.loginLink )} >
+            { t('link.no_account') } 
+            <Link prefetch href="/signup">
+              <a style={ defaultLink } >{ t('link.signup') }</a>
+            </Link>
+          </span>
         </section>
       </form> 
     );
@@ -106,30 +117,31 @@ class LoginForm extends React.Component {
 }
 
 LoginForm.propTypes = {
-  handleLogin: PropTypes.func.isRequired
+  handleLogin: PropTypes.func.isRequired,
+  handleResponseReceived: PropTypes.func.isRequired,
+  handleResponseError: PropTypes.func.isRequired,  
+  isFetching: PropTypes.bool.isRequired,
 };
 
 const styles = StyleSheet.create({
-  loginForm: {
-    border: '1px solid black',
-    boxSizing: 'border-box',
-    margin: '0',
+  loginForm: primaryCard.body,
+
+  heading: primaryCard.head,
+
+  button: defaultButton,
+
+  formActions: {
+    alignSelf: 'stretch',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
     flexDirection: 'column',
-    padding: '0.5em'
+    paddingTop: '.5em',
   },
 
-  inputGroup: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    marginBottom: '1em'
+  loginLink: {
+    paddingTop: '8px',
+    color: colorPallet.textPrimary,
   },
-
-  input: defaultInput,
 });
 
 export default LoginForm;

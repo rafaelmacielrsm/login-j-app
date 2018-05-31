@@ -24,6 +24,13 @@ export const fluidValue = ( min, max ) => (
     ${t.breakpoint.small}))`
 );
 
+export const defaultLink = {
+  color: colorPallet.secundaryLight,
+  ':visited': {
+    color: colorPallet.secundaryLight,
+  },
+};
+
 export const defaultInput = {
   width: 'calc(100% - 16px)',
   borderTop: '5px solid #FFF',
@@ -74,4 +81,25 @@ export const defaultButton = {
     fontSize: 24,
     lineHeight: '42px',
   },  
+};
+
+export const primaryCard = {
+  head: {
+    margin: '0.5em 0',
+    textAlign: 'center',
+  },
+  body: {
+    width: '100%',
+    border: '1px solid black',
+    borderRadius: '8px',
+    boxSizing: 'border-box',
+    margin: '0',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    padding: '0.5em',
+    color: colorPallet.textPrimary,
+    backgroundColor: colorPallet.primary,
+  },
 };

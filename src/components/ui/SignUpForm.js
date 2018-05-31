@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
-import Label from './shared/FormLabel';
-import HideIcon from '../../../static/assets/icons/hide.svg';
-import ViewIcon from '../../../static/assets/icons/view.svg';
 import numericMask from '../../helpers/numeric-mask';
 import isEmail from 'validator/lib/isEmail';
 import isLength from 'validator/lib/isLength';
-import debounce from 'lodash/debounce';
 import t from '../../config/locales';
 import { config as generalConfig } from '../../config/general';
+import DefaultInput from './shared/DefaultInput';
+import PasswordInput from './shared/PasswordInput';
+// import Router from 'next/router';
+import Link from 'next/link';
 import { 
-  defaultInput, 
+  primaryCard,
   colorPallet, 
-  fluidValue,
+  defaultLink,
   defaultButton } from './assets/common';
 
 class SignUpForm extends React.Component {
@@ -23,10 +23,10 @@ class SignUpForm extends React.Component {
     this.state = {
       isValid: false,
       errors: { 
-        name: '',
-        email: '',
-        password: '',
-        phone_number: ''
+        name: undefined,
+        email: undefined,
+        password: undefined,
+        phone_number: undefined
       },
       isRevealing: false
     };
@@ -42,10 +42,10 @@ class SignUpForm extends React.Component {
     this.validateInputs = this.validateInputs.bind(this);
   }
 
-  handlePhoneInput = ( event ) => {
-    let inputValue = event.target.value;    
+  handlePhoneInput = () => {
+    let inputValue = this.phoneNumberInput.value;    
 
-    event.target.value = numericMask(inputValue, generalConfig.phoneMask);
+    this.phoneNumberInput.value = numericMask(inputValue, generalConfig.phoneMask);
 
     this.validateInputs();
   }
@@ -60,9 +60,10 @@ class SignUpForm extends React.Component {
       this.phoneNumberInput.value,
     ];
 
-    this.props.handleFormSubmission( { name: '', email: 'ra@ge', password: '', phone_number: '' } )
+    this.props.handleFormSubmission( { name: '', email, password, phone_number } )
       .then(async (response) => {
         this.props.handleResponseReceived();
+
         const { status } = response;
         if (status === 422) {
           let errors = {};
@@ -122,79 +123,45 @@ class SignUpForm extends React.Component {
   }
 
   render() {
-    const { isValid, isRevealing } = this.state;
+    const { isValid, isRevealing, errors } = this.state;
     return (
       <form className={ css( styles.signupForm )}>
         <section>
-          <h1>{ this.title }</h1>
+          <h1 className={ css( styles.heading )} >{ this.title }</h1>
         </section>
 
-        <section className={ css( styles.inputGroup )}>
-          <Label htmlFor="name">{ t( 'label.name' )}</Label>
+        <DefaultInput 
+          htmlID='name'
+          labelText={ t( 'label.name' ) }
+          errorMessage={ errors.name }
+          onChangeHandle={ this.validateInputs }
+          refInput={ (el) => this.nameInput = el } />
 
-          <input 
-            id="name"
-            autoComplete="off"
-            className={ css( styles.input )}
-            onChange={ debounce(this.validateInputs, 400) }
-            ref={(el) => this.nameInput = el}
-            type="text"/>
+        <DefaultInput 
+          htmlID='email'
+          labelText={ t( 'label.email' ) }
+          errorMessage={ errors.email }
+          onChangeHandle={ this.validateInputs }
+          refInput={ (el) => this.emailInput = el } />
 
-          { this.state.errors.name }
-        </section>
+        <PasswordInput 
+          htmlID='password'
+          labelText={ t( 'label.password' ) }
+          isRevealing ={ isRevealing }
+          errorMessage={ errors.password }
+          onChangeHandle={ this.validateInputs }
+          revealFieldHandle={ this.onRevealField }
+          refInput={ (el) => this.passwordInput = el } />
 
-        <section className={ css( styles.inputGroup )}>
-          <Label htmlFor="email">{ t( 'label.email' )}</Label>
+        <DefaultInput 
+          debounce={ false }
+          htmlID='phone_number'
+          labelText={ t( 'label.phone_number' ) }
+          errorMessage={ errors.phone_number }
+          onChangeHandle={ this.handlePhoneInput }
+          refInput={ (el) => this.phoneNumberInput = el } />
 
-          <input 
-            id="email"
-            autoComplete="off"
-            className={ css( styles.input )}
-            onChange={ debounce(this.validateInputs, 400) }
-            ref={(el) => this.emailInput = el}
-            type="text"/>
-
-          { this.state.errors.email }
-        </section>
-
-        <section className={ css( styles.inputGroup )}>
-          <Label htmlFor="password">{ t( 'label.password' )}</Label>
-
-          <div className={ css( styles.inputGroupWithIcon )}>
-            <input 
-              id="password"
-              className={ css( [styles.input, styles.inputWithAction ])}
-              onChange={ debounce(this.validateInputs, 400) }
-              ref={(el) => this.passwordInput = el}
-              type={ isRevealing? 'text' : 'password' }/>
-
-            { isRevealing 
-              ? <HideIcon 
-                className={ css( styles.svgIcon ) } 
-                onClick={this.onRevealField}/>
-              : <ViewIcon 
-                className={ css( styles.svgIcon ) }
-                onClick={this.onRevealField} /> }
-          </div>
-
-          { this.state.errors.password }
-        </section>
-
-        <section className={ css( styles.inputGroup )}>
-          <Label htmlFor="phone-number">{ t( 'label.phone_number' )}</Label>
-
-          <input 
-            id="phone-number"
-            autoComplete="off"
-            className={ css( styles.input )}
-            onChange={this.handlePhoneInput}
-            ref={(el) => this.phoneNumberInput = el}
-            type="text"/>
-
-          { this.state.errors.phone_number }
-        </section>
-
-        <section>
+        <section className={ css( styles.formActions )} >
           <button 
             className={ css( styles.button )} 
             disabled={ !isValid || this.props.isFetching }
@@ -202,6 +169,13 @@ class SignUpForm extends React.Component {
             
             { t( 'label.button.register' )}
           </button>
+
+          <span className={ css( styles.loginLink )} >
+            { t('link.has_account') } 
+            <Link prefetch href="/login">
+              <a style={ defaultLink } >{ t('link.login') }</a>
+            </Link>
+          </span>
         </section>
       </form>
     );
@@ -216,68 +190,24 @@ SignUpForm.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  signupForm: {
-    width: '100%',
-    border: '1px solid black',
-    borderRadius: '8px',
-    boxSizing: 'border-box',
-    margin: '0',
+  signupForm: primaryCard.body,
+
+  heading: primaryCard.head,
+
+  button: defaultButton,
+
+  formActions: {
+    alignSelf: 'stretch',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
     flexDirection: 'column',
-    padding: '0.5em',
+    paddingTop: '.5em',
+  },
+
+  loginLink: {
+    paddingTop: '8px',
     color: colorPallet.textPrimary,
-    backgroundColor: colorPallet.primary,
   },
-
-  inputGroup: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    marginBottom: '1em',
-    width: '100%',
-  },
-  
-  inputGroupWithIcon: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-
-  input: defaultInput,
-
-  inputWithAction: {
-    width: '100%',
-    paddingRight: fluidValue(36, 51.5),
-    boxSizing: 'border-box',
-  },
-
-  svgIcon: {
-    boxShadow: '-1px 5px 10px rgba(0, 0, 0, 1)',
-    position: 'absolute',
-    alignSelf: 'flex-end',
-    fill: colorPallet.textSecundary,
-    stroke: colorPallet.textSecundary,
-    borderRadius: 4,
-    marginRight: 0,
-    height: '36px',
-    backgroundColor: colorPallet.secundary,
-    '@media screen and (min-width: 320px)':{
-      height: fluidValue(36, 51.5),
-    },
-    '@media screen and (min-width: 768px)':{
-      height: '51.5px',
-    },
-    ':hover': {
-      cursor: 'pointer',
-      backgroundColor: colorPallet.secundaryDark,
-    }    
-  },
-
-  button: defaultButton
 });
 
 export default SignUpForm;
