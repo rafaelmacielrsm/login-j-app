@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     width: '100%',
     zIndex: '10',
     overflow: 'hidden',
+    transform: 'scale(1, 1)',
     ':hover': {
       cursor: 'pointer',
     },
@@ -65,13 +66,13 @@ const styles = StyleSheet.create({
     animationName: {
       'from': {
         opacity: 0,
+        transform: 'scale(1.5, 1.5)',
         bottom: '-5%',
-        transform: 'scale(1.5, 1.5)'
       },
       '50%': {
+        transform: 'scale(1, 1)',
         bottom: '0',        
         opacity: 1,
-        transform: 'scale(1, 1)'
       },
       'to': {
         opacity: 1,
