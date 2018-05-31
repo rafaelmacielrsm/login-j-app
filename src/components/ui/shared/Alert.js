@@ -3,15 +3,15 @@ import { StyleSheet, css } from 'aphrodite/no-important';
 import { colorPallet } from '../assets/common';
 import { fluidValue } from '../assets/common';
 
-const Alert = ({ message, handleClick }) => {
+const Alert = ({ alert, handleClick }) => {
   return(
     <div 
       onClick={() => handleClick() }
-      className={ css( styles.alertContainer )} >
+      className={ css( styles.alertContainer, alert.success && styles.error)} >
 
       <span className={ css( styles.alertMessage ) }>
         <p className={ css( styles.paragraph )} >
-          { message }
+          { alert.message }
         </p>
       </span>
     </div>
@@ -40,6 +40,12 @@ const styles = StyleSheet.create({
       fontSize: '24px',
     },
   },
+
+  error: {
+    backgroundColor: colorPallet.success,
+    color: colorPallet.textSecundary,
+  },
+
   alertContainer: {
     display: 'flex',
     alignItems: 'center',
@@ -47,6 +53,7 @@ const styles = StyleSheet.create({
     boxShadow: '0 0 10px black',
     justifyContent: 'center',
     backgroundColor: colorPallet.alert,
+    color: colorPallet.textPrimary,
     height: '52px',
     position: 'fixed',
     bottom: '0',

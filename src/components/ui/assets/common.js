@@ -9,6 +9,8 @@ export const colorPallet = {
   textSecundary: '#000000',
   alert: '#b00020',
   disabled: '#E1E2E1',
+  success: '#009688',
+  successDark: '#00675b',
 };
 
 const t = {
@@ -31,27 +33,6 @@ export const defaultLink = {
   },
 };
 
-export const defaultInput = {
-  width: 'calc(100% - 16px)',
-  borderTop: '5px solid #FFF',
-  borderBottom: '5px solid #FFF',
-  borderLeft: '8px solid #FFF',
-  borderRight: '8px solid #FFF',
-  boxShadow: '1px 2px 4px black',
-  borderRadius: 4,
-  padding: 0,
-  fontSize: 16,
-  lineHeight: '26px',
-  '@media screen and (min-width: 320px)':{
-    fontSize: fluidValue(16,24),
-    lineHeight: fluidValue(26, 42),
-  },
-  '@media screen and (min-width: 768px)':{
-    fontSize: 24,
-    lineHeight: '42px',
-  },
-};
-
 export const defaultButton = {
   border: 0,
   margin: 0,
@@ -59,7 +40,7 @@ export const defaultButton = {
   borderRadius: '.25em',
   boxShadow: '1px 2px 4px black',
   color: colorPallet.textSecundary,
-  backgroundColor: colorPallet.secundary,
+  backgroundColor: colorPallet.success,
   ':disabled': {
     cursor: 'not-allowed',
     backgroundColor: colorPallet.disabled,
@@ -71,7 +52,7 @@ export const defaultButton = {
   },
   ':hover': {
     cursor: 'pointer',
-    backgroundColor: colorPallet.secundaryDark,
+    backgroundColor: colorPallet.successDark,
   },
   '@media screen and (min-width: 320px)':{
     fontSize: fluidValue(16,24),

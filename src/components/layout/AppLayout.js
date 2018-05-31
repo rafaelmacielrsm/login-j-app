@@ -14,7 +14,7 @@ const AppLayout = (props) => {
 
       { props.alerts.length > 0 && 
         <Alert 
-          message={ props.alerts[0] } 
+          alert={ props.alerts[0] } 
           handleClick={ props.handleAlertClick }/> }
 
       { props.children }
