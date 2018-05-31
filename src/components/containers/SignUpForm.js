@@ -5,6 +5,12 @@ import {
   cancelFetching, 
   addErrorMessage } from '../../store/actions';
 
+const mapStateToProps = ( state ) => {
+  return {
+    isFetching: state.fetching
+  };
+};
+
 const mapDispatchToProps = ( dispatch ) => {
   return {
     handleFormSubmission: ( dataObj ) => {
@@ -19,6 +25,6 @@ const mapDispatchToProps = ( dispatch ) => {
   };
 };
 
-const Container = connect(null, mapDispatchToProps)(SignUpForm);
+const Container = connect(mapStateToProps, mapDispatchToProps)(SignUpForm);
 
 export default Container;

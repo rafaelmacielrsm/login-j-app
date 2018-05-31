@@ -38,3 +38,7 @@ export const cancelFetching = () => ( dispatch, getState ) => {
 export const addErrorMessage = ( message ) => ( dispatch ) => {
   return dispatch({ type: C.ADD_ERROR, payload: message });
 };
+
+export const removeErrorMessage = ( index ) => ( dispatch ) => {
+  return dispatch({ type: C.CLEAR_ERROR, payload: index });
+};

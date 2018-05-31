@@ -197,7 +197,7 @@ class SignUpForm extends React.Component {
         <section>
           <button 
             className={ css( styles.button )} 
-            disabled={ !isValid }
+            disabled={ !isValid || this.props.isFetching }
             onClick={ this.onSubmitForm }> 
             
             { t( 'label.button.register' )}
@@ -212,6 +212,7 @@ SignUpForm.propTypes = {
   handleFormSubmission: PropTypes.func.isRequired,
   handleResponseReceived: PropTypes.func.isRequired,
   handleResponseError: PropTypes.func.isRequired,  
+  isFetching: PropTypes.bool.isRequired,
 };
 
 const styles = StyleSheet.create({
