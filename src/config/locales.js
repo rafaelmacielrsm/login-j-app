@@ -7,6 +7,7 @@ const locales = {
     },
 
     error: {
+      unauthorized: 'É necessário fazer login para acessar',
       invalid_email: 'Não é um email válido',
       required: 'Campo obrigatório',
       network: 'Falha na Conexão, tente novamente em alguns momentos',
@@ -15,6 +16,7 @@ const locales = {
     },
 
     label: {
+      greetings: 'Bem Vindo',
       name: 'Nome',
       email: 'Email',
       password: 'Senha',

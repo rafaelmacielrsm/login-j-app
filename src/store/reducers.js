@@ -1,6 +1,17 @@
 import C from './constants';
 import { combineReducers } from 'redux';
 
+const userData = ( state = {}, action ) => {
+  switch (action.type) {
+  case C.ADD_USER_INFO:
+    return action.payload;
+  case C.LOGOUT:
+    return {};
+  default:
+    return state;
+  }
+};
+
 const auth = ( state = {}, action ) => {
   switch ( action.type ) {
   case C.LOGIN:
@@ -38,7 +49,8 @@ const fetching = ( state = false, action ) => {
 const reducer = combineReducers({
   auth, 
   alerts,
-  fetching
+  fetching,
+  userData
 });
 
 export default reducer;

@@ -1,10 +1,10 @@
 import AppLayout from '../src/components/layout/AppLayout';
 import SignUpForm from '../src/components/containers/SignUpForm';
 
-const Index = () => (
+const SignUp = () => (
   <AppLayout>
     <SignUpForm />
   </AppLayout>
 );
 
-export default Index;
+export default SignUp;

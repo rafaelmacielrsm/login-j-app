@@ -32,7 +32,7 @@ export default class MyDocument extends Document {
           <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
           <style data-aphrodite dangerouslySetInnerHTML={{ __html: this.props.css.content }} />
         </Head>
-        <body style={{ margin: 0, padding: 0 }}>
+        <body style={{ margin: 0, padding: 0, backgroundColor: '#FFF' }}>
           <Main />
           <NextScript />
         </body>

@@ -1,6 +1,23 @@
 import { config } from '../config/general';
 import C from './constants';
-import { loginRequest, createUserRequest } from '../lib/api-connection';
+import { 
+  loginRequest, 
+  fetchUserData,
+  createUserRequest } from '../lib/api-connection';
+
+export const addAuthenticatedUserData = ( userData ) => ( dispatch ) => (
+  dispatch({ type: C.ADD_USER_INFO, payload: userData })
+);
+
+export const fetchAuthenticatedUser = ( credential ) => ( dispatch )  => {
+  dispatch( fetching() );
+
+  setTimeout(() => {
+    dispatch( cancelFetching() );
+  }, 3000);
+
+  return fetchUserData( credential );
+};
 
 export const loginUserRequest = ( email, password ) => ( dispatch )  => {
   dispatch( fetching() );

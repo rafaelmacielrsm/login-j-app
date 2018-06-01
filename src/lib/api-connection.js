@@ -26,3 +26,17 @@ export const createUserRequest = ( dataObj ) => (
     }
   )
 );
+
+export const fetchUserData = ( credential = '' ) => (
+  fetch(
+    serverURI( '/1.0/meu-perfil' ),
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Token token="${credential}"`
+      }
+    }
+  )
+)

@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100vh',
     margin: '0',
-    padding: '0 1em 0 1em',
+    padding: '0 .5em 0 .5em',
     boxSizing: 'border-box',
     display: 'flex',
     alignItems: 'center',

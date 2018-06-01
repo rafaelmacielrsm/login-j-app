@@ -4,5 +4,6 @@
     "expireAt": ""
   },
   "alerts": [],
-  "fetching": false
+  "fetching": false,
+  "userData": {}
 }
