@@ -19,8 +19,8 @@ const mapDispatchToProps = ( dispatch ) => {
     handleResponseReceived: () => {
       return dispatch( cancelFetching() );
     },
-    handleResponseError: ( errorMessage ) => {
-      return dispatch( addAlertMessage( errorMessage ));
+    handleResponseMessage: ( errorMessage, success = false ) => {
+      return dispatch( addAlertMessage( errorMessage, success ));
     }
   };
 };

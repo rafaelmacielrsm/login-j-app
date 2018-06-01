@@ -2,6 +2,10 @@ import get from 'lodash/get';
 
 const locales = {
   'pt_BR': {
+    success: {
+      login: 'Login Efetuado com Sucesso',
+    },
+
     error: {
       invalid_email: 'Não é um email válido',
       required: 'Campo obrigatório',
@@ -9,6 +13,7 @@ const locales = {
       short: ( minimum ) => `Tamanho mínimo: ${minimum}`,
       invalid_format: ( format ) => `Formato: ${format}`,
     },
+
     label: {
       name: 'Nome',
       email: 'Email',
@@ -19,12 +24,14 @@ const locales = {
         login: 'Acessar'
       }
     },
+
     link: {
       has_account: 'Já possui conta? ',
       login: 'Acesse aqui. ',
       no_account: 'Não possui Cadastro? ',
       signup: 'Cadastre aqui. ',
     },
+
     page: {
       signup: {
         title: 'Cadastre uma Conta'

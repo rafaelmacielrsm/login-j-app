@@ -57,26 +57,31 @@ class LoginForm extends React.Component {
 
     const [email, password] = [ this.emailInput.value, this.passwordInput.value];
 
-    this.props.handleLogin( email, password )
+    this.props.handleFormSubmission( email, password )
       .then(async (response) => {
         this.props.handleResponseReceived();
 
         const { status } = response;
-        const data = await response.json();
+        const json = await response.json();
 
-        if (status == 401) {
-          this.props.handleResponseError(data.message);
+        if ( status == 401 ) {
+          this.props.handleResponseMessage( json.message );
+        }
+
+        if ( status == 200 ) {
+          this.props.handleResponseMessage( t( 'success.login' ), true );
+          this.props.handleSubmissionSuccess( json.data.user_token );
         }
       })
-      .catch(() => this.props.handleResponseError( t('error.network')));
+      .catch(() => this.props.handleResponseMessage( t( 'error.network' )));
   }
 
   render() {
     const { errors, isValid, isRevealingPassord } = this.state;
     return (
       <form className={ css(styles.loginForm) }>
-        <section>
-          <h1 className={ css( styles.heading )} >{ t( 'page.login.title' ) }</h1>
+        <section className={ css( styles.heading )} >
+          <h1 className={ css( styles.title )} >{ t( 'page.login.title' ) }</h1>
         </section>
 
         <DefaultInput 
@@ -117,9 +122,10 @@ class LoginForm extends React.Component {
 }
 
 LoginForm.propTypes = {
-  handleLogin: PropTypes.func.isRequired,
+  handleFormSubmission: PropTypes.func.isRequired,
   handleResponseReceived: PropTypes.func.isRequired,
-  handleResponseError: PropTypes.func.isRequired,  
+  handleSubmissionSuccess: PropTypes.func.isRequired,
+  handleResponseMessage: PropTypes.func.isRequired,  
   isFetching: PropTypes.bool.isRequired,
 };
 
@@ -127,6 +133,8 @@ const styles = StyleSheet.create({
   loginForm: primaryCard.body,
 
   heading: primaryCard.head,
+
+  title: primaryCard.title,
 
   button: defaultButton,
 

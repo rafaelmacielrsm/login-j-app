@@ -1,11 +1,7 @@
 {
   "auth": {
-    "user": {
-      "identifier": "",
-      "name": "",
-      "email": ""
-    },
-    "isAuthenticated": false
+    "token": "",
+    "expireAt": ""
   },
   "alerts": [],
   "fetching": false

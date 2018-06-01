@@ -1,23 +1,12 @@
 import C from './constants';
 import { combineReducers } from 'redux';
 
-const user = ( state = {}, action ) => {
+const auth = ( state = {}, action ) => {
   switch ( action.type ) {
   case C.LOGIN:
     return action.payload;
-  case C.LOGOUT:
+  case C.LOGOUT: 
     return {};
-  default:
-    return state;
-  }
-};
-
-const isAuthenticated = ( state = false, action ) => {
-  switch ( action.type ) {
-  case C.LOGIN:
-    return true;
-  case C.LOGOUT:
-    return false;
   default:
     return state;
   }
@@ -47,9 +36,7 @@ const fetching = ( state = false, action ) => {
 
 
 const reducer = combineReducers({
-  auth: combineReducers({
-    user, isAuthenticated
-  }),
+  auth, 
   alerts,
   fetching
 });

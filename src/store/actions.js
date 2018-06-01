@@ -1,7 +1,8 @@
+import { config } from '../config/general';
 import C from './constants';
 import { loginRequest, createUserRequest } from '../lib/api-connection';
 
-export const loginUser = ( email, password ) => ( dispatch )  => {
+export const loginUserRequest = ( email, password ) => ( dispatch )  => {
   dispatch( fetching() );
 
   setTimeout(() => {
@@ -9,6 +10,17 @@ export const loginUser = ( email, password ) => ( dispatch )  => {
   }, 3000);
 
   return loginRequest(email, password);
+};
+
+export const loginUser = ( authToken ) => ( dispatch ) => {
+  return (
+    dispatch(
+      { 
+        type: C.LOGIN,
+        payload: {  token: authToken, expireAt: config.expireTime() }
+      }
+    )
+  );
 };
 
 export const createUser = ( userDataObj ) => ( dispatch )  => {

@@ -8,7 +8,7 @@ import t from '../../config/locales';
 import { config as generalConfig } from '../../config/general';
 import DefaultInput from './shared/DefaultInput';
 import PasswordInput from './shared/PasswordInput';
-// import Router from 'next/router';
+import Router from 'next/router';
 import Link from 'next/link';
 import { 
   primaryCard,
@@ -60,16 +60,15 @@ class SignUpForm extends React.Component {
       this.phoneNumberInput.value,
     ];
 
-    this.props.handleFormSubmission( { name: '', email, password, phone_number } )
+    this.props.handleFormSubmission( { name, email, password, phone_number } )
       .then(async (response) => {
         this.props.handleResponseReceived();
 
         const { status } = response;
+        const data = await response.json();
+
         if (status === 422) {
           let errors = {};
-
-          const data = await response.json();
-
           const messagesObj = JSON.parse(data.message);
           
           for (const key in messagesObj) {
@@ -78,8 +77,13 @@ class SignUpForm extends React.Component {
           
           this.setState({ errors, isValid: false });
         }
+
+        if ( status === 201 ) {
+          this.props.handleResponseMessage( data.message, true );
+          Router.push( '/login' );
+        }
       })
-      .catch(() => this.props.handleResponseError( t('error.network')));
+      .catch(() => this.props.handleResponseMessage( t('error.network')));
   }
 
   validateInputs = () => {
@@ -126,8 +130,8 @@ class SignUpForm extends React.Component {
     const { isValid, isRevealing, errors } = this.state;
     return (
       <form className={ css( styles.signupForm )}>
-        <section>
-          <h1 className={ css( styles.heading )} >{ this.title }</h1>
+        <section className={ css( styles.heading )} >
+          <h1 className={ css( styles.title )} >{ this.title }</h1>
         </section>
 
         <DefaultInput 
@@ -185,12 +189,14 @@ class SignUpForm extends React.Component {
 SignUpForm.propTypes = {
   handleFormSubmission: PropTypes.func.isRequired,
   handleResponseReceived: PropTypes.func.isRequired,
-  handleResponseError: PropTypes.func.isRequired,  
+  handleResponseMessage: PropTypes.func.isRequired,  
   isFetching: PropTypes.bool.isRequired,
 };
 
 const styles = StyleSheet.create({
   signupForm: primaryCard.body,
+
+  title: primaryCard.title,
 
   heading: primaryCard.head,
 

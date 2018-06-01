@@ -68,7 +68,14 @@ export const primaryCard = {
   head: {
     margin: '0.5em 0',
     textAlign: 'center',
+    width: '100%',
   },
+
+  title: {
+    margin: 0,
+    padding: 0,
+  },
+
   body: {
     width: '100%',
     border: '1px solid black',

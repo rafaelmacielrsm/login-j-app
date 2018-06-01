@@ -1,6 +1,10 @@
 import { connect } from 'react-redux';
 import LoginForm from '../ui/LoginForm';
-import { loginUser, cancelFetching, addAlertMessage } from '../../store/actions';
+import { 
+  loginUser,
+  loginUserRequest, 
+  cancelFetching, 
+  addAlertMessage } from '../../store/actions';
 
 const mapStateToProps = ( state ) => {
   return {
@@ -10,18 +14,21 @@ const mapStateToProps = ( state ) => {
 
 const mapDispatchToProps = ( dispatch ) => {
   return {
-    handleLogin: ( email, password ) => {
-      return dispatch( loginUser( email, password ));
+    handleFormSubmission: ( email, password ) => {
+      return dispatch( loginUserRequest( email, password ));
     },
     handleResponseReceived: () => {
       return dispatch( cancelFetching() );
     },
-    handleResponseError: ( errorMessage ) => {
-      return dispatch( addAlertMessage( errorMessage ));
+    handleResponseMessage: ( errorMessage, success = false ) => {
+      return dispatch( addAlertMessage( errorMessage, success ));
+    },
+    handleSubmissionSuccess: ( data ) => {
+      return dispatch( loginUser( data ));
     }
   };
 };
 
-const Container = connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+const Container = connect( mapStateToProps, mapDispatchToProps )( LoginForm );
 
 export default Container;
