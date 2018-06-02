@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
     color: 'white',
     width: '100%',
-    height: '100vh',
+    minHeight: '100vh',
     margin: '0',
     padding: '0 .5em 0 .5em',
     boxSizing: 'border-box',

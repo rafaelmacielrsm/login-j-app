@@ -17,13 +17,15 @@ const locales = {
 
     label: {
       greetings: 'Bem Vindo',
+      username: 'Nome de Usuário',
       name: 'Nome',
       email: 'Email',
       password: 'Senha',
       phone_number: 'Número de Telefone',
       button: {
         register: 'Cadastrar',
-        login: 'Acessar'
+        login: 'Acessar',
+        edit: 'Editar Dados',
       }
     },
 
