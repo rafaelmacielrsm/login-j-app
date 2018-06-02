@@ -12,6 +12,7 @@ const DefaultInput = ( props ) => {
       <Label htmlFor={ props.htmlID }>{ props.labelText }</Label>
 
       <input 
+        defaultValue={ props.initialValue }
         id={ props.htmlID }
         className={ css( styles.input )}
         onChange={ props.debounce != false
@@ -49,13 +50,10 @@ const styles = StyleSheet.create({
 
   input: {
     width: 'calc(100% - 16px)',
-    borderTop: '5px solid #FFF',
-    borderBottom: '5px solid #FFF',
-    borderLeft: '8px solid #FFF',
-    borderRight: '8px solid #FFF',
+    border: 0,
+    padding: '5px 8px',
     boxShadow: '1px 2px 4px black',
     borderRadius: 4,
-    padding: 0,
     fontSize: 16,
     lineHeight: '26px',
     '@media screen and (min-width: 320px)':{

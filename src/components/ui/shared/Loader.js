@@ -11,6 +11,7 @@ const Loader = () => {
 const styles = StyleSheet.create({
   loader: {
     top: 0,
+    zIndex: 2,
     height: 4,
     width: '100%',
     position: 'fixed',

@@ -26,10 +26,31 @@ export const fluidValue = ( min, max ) => (
     ${t.breakpoint.small}))`
 );
 
+export const fadeInAnimation = {
+  animationName: {
+    'from': { 
+      opacity: 0,
+    },
+    'to': { 
+      opacity: 1,
+    },
+  },
+  animationDuration: '.5s',
+  animationIterationCount: '1',
+  animationTimingFunction: 'ease-in-out'    
+};
+
 export const defaultLink = {
   color: colorPallet.secundaryLight,
   ':visited': {
     color: colorPallet.secundaryLight,
+  },
+};
+
+export const backLink = {
+  color: colorPallet.primaryDark,
+  ':visited': {
+    color: colorPallet.primaryDark,
   },
 };
 
@@ -40,7 +61,7 @@ export const defaultButton = {
   borderRadius: '.25em',
   boxShadow: '1px 2px 4px black',
   color: colorPallet.textSecundary,
-  backgroundColor: colorPallet.success,
+  backgroundColor: colorPallet.secundary,
   ':disabled': {
     cursor: 'not-allowed',
     backgroundColor: colorPallet.disabled,
@@ -52,7 +73,7 @@ export const defaultButton = {
   },
   ':hover': {
     cursor: 'pointer',
-    backgroundColor: colorPallet.successDark,
+    backgroundColor: colorPallet.secundaryDark,
   },
   '@media screen and (min-width: 320px)':{
     fontSize: fluidValue(16,24),

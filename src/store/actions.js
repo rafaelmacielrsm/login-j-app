@@ -1,8 +1,10 @@
 import { config } from '../config/general';
 import C from './constants';
 import { 
+  validateUserNameRequest,
   loginRequest, 
   fetchUserData,
+  updateUserRequest,
   createUserRequest } from '../lib/api-connection';
 
 export const addAuthenticatedUserData = ( userData ) => ( dispatch ) => (
@@ -50,6 +52,23 @@ export const createUser = ( userDataObj ) => ( dispatch )  => {
   return createUserRequest( userDataObj );
 };
 
+export const updateUser = ( userDataObj ) => ( dispatch, getState )  => {
+  dispatch( fetching() );
+
+  setTimeout(() => {
+    dispatch( cancelFetching() );
+  }, 3000);
+
+  const id = getState().userData.id;
+  const token = getState().auth.token;
+  
+  return updateUserRequest( token, id, userDataObj );
+};
+
+export const removeUserData = (  ) => ( dispatch ) => {
+  return dispatch({ type: C.REMOVE_USER_INFO });
+};
+
 export const logoutUser = () => dispatch => {
   return dispatch({ type: C.LOGOUT });
 };
@@ -70,4 +89,8 @@ export const addAlertMessage = ( message, success = false ) => ( dispatch ) => {
 
 export const removeAlertMessage = ( index ) => ( dispatch ) => {
   return dispatch({ type: C.CLEAR_ALERT, payload: index });
+};
+
+export const validateUsername = ( username ) =>  {
+  return validateUserNameRequest( username );
 };

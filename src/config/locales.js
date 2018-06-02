@@ -9,6 +9,7 @@ const locales = {
     error: {
       unauthorized: 'É necessário fazer login para acessar',
       invalid_email: 'Não é um email válido',
+      blank: 'Não pode ficar em branco',
       required: 'Campo obrigatório',
       network: 'Falha na Conexão, tente novamente em alguns momentos',
       short: ( minimum ) => `Tamanho mínimo: ${minimum}`,
@@ -26,6 +27,7 @@ const locales = {
         register: 'Cadastrar',
         login: 'Acessar',
         edit: 'Editar Dados',
+        update: 'Salvar'
       }
     },
 
@@ -42,6 +44,9 @@ const locales = {
       },
       login: {
         title: 'Bem Vindo',
+      },
+      editUser: {
+        title: 'Atualização de Dados',
       },
     },
   }

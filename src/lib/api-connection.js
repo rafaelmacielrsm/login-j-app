@@ -13,6 +13,33 @@ export const loginRequest = ( email, password ) => (
   )
 );
 
+export const validateUserNameRequest = ( queryParam = '' ) => (
+  fetch(
+    serverURI( `/1.0/validar-username?username=${queryParam}` ),
+    {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+      }
+    }
+  )
+);
+
+export const updateUserRequest = ( credential, id, dataObj ) => (
+  fetch(
+    serverURI( `/1.0/usuarios/${id}` ),
+    {
+      method: 'PUT', 
+      headers: {
+        'Content-Type': 'application/json',     
+        'Accept': 'application/json',
+        'Authorization': `Token token="${credential}"`
+      },
+      body: JSON.stringify({ user: dataObj })
+    }
+  )
+);
+
 export const createUserRequest = ( dataObj ) => (
   fetch(
     serverURI( '/1.0/usuarios' ),

@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
       'from': {
         height: 0,
         opacity: 0,
-        marginTop: '-10',
       },
       'to': {
         height: '100%',

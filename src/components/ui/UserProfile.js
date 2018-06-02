@@ -1,26 +1,34 @@
 import React from 'react';
 import t from '../../config/locales';
 import { StyleSheet, css } from 'aphrodite';
-import { primaryCard } from '../ui/assets/common';
+import Link from 'next/link';
+import { 
+  fadeInAnimation,
+  colorPallet,
+  defaultButton,
+  primaryCard } from '../ui/assets/common';
 
 class UserProfile extends React.Component {
   render() {
-    const { name, id, username, email, resume } = this.props.userData;
+    const { name, username, email } = this.props.userData;
 
     return (
-      <article  >
+      <article className={ css( styles.card, styles.fadeInAnimation )}  >
+        <header>
+          <h1>Olá {name && name.split(' ')[0]}</h1>
+        </header>
 
-        <section className={ css( styles.card )}>id: { id }</section>
-          
-        <section className={ css( styles.card )}>
-          name: { name }
+        <section className={ css( styles.textSection )} >
+          <p><span>{ t( 'label.name' )}:</span> { name }</p>
+          <p><span>{ t( 'label.email' )}:</span> { email }</p>
+          <p><span>{ t( 'label.username' )}:</span> { username }</p>
         </section>
-
-        <section className={ css( styles.card )}>username: { username }</section>
-
-        <section className={ css( styles.card )}>email: { email }</section>
-
-        <section className={ css( styles.card )}>resume: { resume }</section>
+          
+        <Link prefetch href='/user/edit'>
+          <span className={ css( styles.defaultButton, styles.editButton )} >
+            { t( 'label.button.edit' ) }
+          </span>          
+        </Link>
       </article>
     );
   }
@@ -29,9 +37,21 @@ class UserProfile extends React.Component {
 const styles = StyleSheet.create({
   card: primaryCard.body,
 
-  headerSection: primaryCard.title,
+  textSection: {
+    textAlign: 'left',
+    width: '100%',
+  },
 
-  cartTitle: primaryCard.head,
+  fadeInAnimation: fadeInAnimation,
+
+  defaultButton,
+  editButton: {
+    alignSelf: 'flex-end',
+    backgroundColor: colorPallet.secundary,
+    ':hover': {
+      backgroundColor: colorPallet.secundaryDark,
+    },
+  }
 });
 
 export default UserProfile;

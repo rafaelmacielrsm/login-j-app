@@ -6,6 +6,7 @@ const userData = ( state = {}, action ) => {
   case C.ADD_USER_INFO:
     return action.payload;
   case C.LOGOUT:
+  case C.REMOVE_USER_INFO:
     return {};
   default:
     return state;

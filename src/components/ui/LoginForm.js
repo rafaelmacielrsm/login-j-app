@@ -5,6 +5,7 @@ import { StyleSheet, css } from 'aphrodite';
 import isEmail from 'validator/lib/isEmail';
 import t from '../../config/locales';
 import DefaultInput from './shared/DefaultInput';
+import { replaceRouteAndCallback } from '../../helpers/routesHelpers';
 import PasswordInput from './shared/PasswordInput';
 import { 
   defaultButton, 
@@ -69,8 +70,14 @@ class LoginForm extends React.Component {
         }
 
         if ( status == 200 ) {
-          this.props.handleResponseMessage( t( 'success.login' ), true );
           this.props.handleSubmissionSuccess( json.data.user_token );
+
+          replaceRouteAndCallback( 
+            this.props.handleResponseMessage.bind(this),
+            '/user/profile',
+            t( 'success.login' ), true
+          );
+          // this.props.handleResponseMessage( t( 'success.login' ), true );
         }
       })
       .catch(() => this.props.handleResponseMessage( t( 'error.network' )));

@@ -4,24 +4,12 @@ import { connect } from 'react-redux';
 import AppLayout from '../layout/AppLayout';
 import Menu from '../ui/shared/Menu';
 import t from '../../config/locales';
-import Router from 'next/router';
 import { replaceRouteAndCallback } from '../../helpers/routesHelpers';
 import { 
   addAuthenticatedUserData,
   cancelFetching,
   addAlertMessage,
   fetchAuthenticatedUser } from '../../store/actions';
-
-// const test = ( callBackAfterRedirect ) => {
-//   Router.onRouteChangeComplete = (  ) => {
-//     callBackAfterRedirect( t('error.unauthorized'));
-
-//     setTimeout(() => {
-//       Router.onRouteChangeComplete = null;
-//     }, 1000);
-//   };
-//   Router.replace('/login');    
-// };
 
 class RestrictedResource extends React.Component {
   constructor( state ) {
@@ -52,8 +40,8 @@ class RestrictedResource extends React.Component {
           const jsonObj = await response.json();
 
           if (status === 200) {
-            const { name, id, email, username, resume } = jsonObj.data;
-            this.props.handleSuccessFetching({ name, id, email, username, resume });
+            const { name, id, email, username } = jsonObj.data;
+            this.props.handleSuccessFetching({ name, id, email, username });
           }
           
           if ( status === 401 ) {

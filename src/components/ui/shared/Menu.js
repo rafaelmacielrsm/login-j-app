@@ -37,13 +37,14 @@ class Menu extends React.Component {
 
 const styles = StyleSheet.create({
   navContainer: {
+    zIndex: 2,
     backgroundColor: colorPallet.primaryDark,
     borderRadius: '0 0 8px 8px',
     color: colorPallet.textPrimary,
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    position: 'absolute',
+    position: 'fixed',
     top: '0',
     overflow: 'hidden',
     boxSizing: 'border-box',

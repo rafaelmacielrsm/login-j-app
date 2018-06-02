@@ -52,10 +52,12 @@ export default PasswordInput;
 
 const styles = StyleSheet.create({
   inputGroup: {
+    flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
+    boxSizing: 'border-box',
     paddingBottom: '0.5em',
     width: '100%',
     overflow: 'hidden',
@@ -64,19 +66,17 @@ const styles = StyleSheet.create({
   inputGroupWithIcon: {
     width: '100%',
     display: 'flex',
-    flexDirection: 'column',
     justifyContent: 'center',
+    flexGrow: 1,
+    flexShrink: 0,
   },
 
   input: {
-    width: 'calc(100% - 16px)',
-    borderTop: '5px solid #FFF',
-    borderBottom: '5px solid #FFF',
-    borderLeft: '8px solid #FFF',
-    borderRight: '8px solid #FFF',
+    flexGrow: 1,
+    border: 0,
+    padding: '0 8px',
     boxShadow: '1px 2px 4px black',
-    borderRadius: 4,
-    padding: 0,
+    borderRadius: '4px 0 0 4px',
     fontSize: 16,
     lineHeight: '26px',
     '@media screen and (min-width: 320px)':{
@@ -90,12 +90,11 @@ const styles = StyleSheet.create({
   },
 
   svgIcon: {
-    boxShadow: '-1px 5px 15px rgba(0, 0, 0, 1)',
-    position: 'absolute',
-    alignSelf: 'flex-end',
+    flexGrow: 0,
+    boxShadow: '1px 2px 4px black',
     fill: colorPallet.textSecundary,
     stroke: colorPallet.textSecundary,
-    borderRadius: 4,
+    borderRadius: '0 4px 4px 0',
     marginRight: 0,
     height: '36px',
     backgroundColor: colorPallet.secundary,

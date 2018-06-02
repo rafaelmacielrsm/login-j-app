@@ -6,6 +6,7 @@ const constants = {
   CLEAR_ALERT: 'CLEAR_ALERT',
   CANCEL_FETCHING: 'CANCEL_FETCHING',
   ADD_USER_INFO: 'ADD_USER_INFO',
+  REMOVE_USER_INFO: 'REMOVE_USER_INFO',
 };
 
 export default constants;
