@@ -66,4 +66,19 @@ export const fetchUserData = ( credential = '' ) => (
       }
     }
   )
-)
+);
+
+export const logoutUserRequest = ( credential = '' ) => (
+  fetch(
+    serverURI( '/1.0/auth' ),
+    {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Token token="${credential}"`
+      },
+      body: JSON.stringify( {} )
+    }
+  )
+);

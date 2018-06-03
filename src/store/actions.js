@@ -1,11 +1,15 @@
 import { config } from '../config/general';
+import t from '../config/locales';
 import C from './constants';
+import Router from 'next/router';
 import { 
   validateUserNameRequest,
+  logoutUserRequest,
   loginRequest, 
   fetchUserData,
   updateUserRequest,
   createUserRequest } from '../lib/api-connection';
+
 
 export const addAuthenticatedUserData = ( userData ) => ( dispatch ) => (
   dispatch({ type: C.ADD_USER_INFO, payload: userData })
@@ -69,8 +73,23 @@ export const removeUserData = (  ) => ( dispatch ) => {
   return dispatch({ type: C.REMOVE_USER_INFO });
 };
 
-export const logoutUser = () => dispatch => {
-  return dispatch({ type: C.LOGOUT });
+export const logoutUser = () => ( dispatch, getState ) => {
+  const token = getState().auth.token;
+
+  logoutUserRequest( token )
+    .then( async (response) => {
+      const { status } = await response;
+
+      if (status == 200) {
+        dispatch({ type: C.LOGOUT });
+        dispatch( addAlertMessage( t( 'success.logout' )));
+        Router.replace('/login');
+      }
+    })
+    .catch( () => {
+      console.log('err?');
+      dispatch( addAlertMessage( t( 'error.network' )));
+    });
 };
 
 export const fetching = () => ( dispatch ) => {
@@ -94,3 +113,4 @@ export const removeAlertMessage = ( index ) => ( dispatch ) => {
 export const validateUsername = ( username ) =>  {
   return validateUserNameRequest( username );
 };
+

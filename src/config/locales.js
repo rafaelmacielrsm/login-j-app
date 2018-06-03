@@ -4,6 +4,7 @@ const locales = {
   'pt_BR': {
     success: {
       login: 'Login Efetuado com Sucesso',
+      logout: 'Logout Efetuado com Sucesso',
     },
 
     error: {
@@ -27,7 +28,8 @@ const locales = {
         register: 'Cadastrar',
         login: 'Acessar',
         edit: 'Editar Dados',
-        update: 'Salvar'
+        update: 'Salvar',
+        logout: 'Sair'
       }
     },
 
@@ -47,6 +49,9 @@ const locales = {
       },
       editUser: {
         title: 'Atualização de Dados',
+      },
+      profile: {
+        title: 'Meus Dados',
       },
     },
   }

@@ -15,7 +15,7 @@ class UserProfile extends React.Component {
     return (
       <article className={ css( styles.card, styles.fadeInAnimation )}  >
         <header>
-          <h1>Olá {name && name.split(' ')[0]}</h1>
+          <h1>{ t( 'page.profile.title' ) }</h1>
         </header>
 
         <section className={ css( styles.textSection )} >

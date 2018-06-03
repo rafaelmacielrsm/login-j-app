@@ -1,6 +1,7 @@
 import { StyleSheet, css } from 'aphrodite/no-important';
 import { colorPallet } from '../assets/common';
 import MenuIcon from '../../../../static/assets/icons/menu.svg';
+import LogoutButton from './LogoutButton';
 import React from 'react';
 
 class Menu extends React.Component {
@@ -27,7 +28,7 @@ class Menu extends React.Component {
 
         { isShowing &&   
           <div className={ css( styles.linkGroup )} >
-            <a className={ css( styles.link )}  href="#">Link 1</a>
+            <LogoutButton />
           </div>
         }
       </nav>
