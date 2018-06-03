@@ -4,12 +4,22 @@ import RestrictedResource
 import EditUserForm 
   from '../../src/components/containers/EditUserForm';
 
+import Head from 'next/head';
+import { metaInfo } from '../../src/config/seo';
+
 class EditPage extends React.Component {
   render() {
     return (
-      <RestrictedResource>
-        <EditUserForm />
-      </RestrictedResource>
+      <div>
+        <Head key='SEO'>
+          <title>{metaInfo.userEdit.title}</title>
+          <meta name="description" content={metaInfo.userEdit.description}/>
+        </Head>        
+
+        <RestrictedResource>
+          <EditUserForm />
+        </RestrictedResource>
+      </div>
     );
   }
 }
