@@ -11,6 +11,7 @@ import PasswordInput from './shared/PasswordInput';
 import Router from 'next/router';
 import Link from 'next/link';
 import { 
+  fadeInAnimation,
   primaryCard,
   colorPallet, 
   defaultLink,
@@ -129,7 +130,7 @@ class SignUpForm extends React.Component {
   render() {
     const { isValid, isRevealing, errors } = this.state;
     return (
-      <form className={ css( styles.signupForm )}>
+      <form className={ css( styles.signupForm, styles.fadeInAnimation )}>
         <section className={ css( styles.heading )} >
           <h1 className={ css( styles.title )} >{ this.title }</h1>
         </section>
@@ -201,6 +202,8 @@ const styles = StyleSheet.create({
   heading: primaryCard.head,
 
   button: defaultButton,
+  
+  fadeInAnimation,
 
   formActions: {
     alignSelf: 'stretch',

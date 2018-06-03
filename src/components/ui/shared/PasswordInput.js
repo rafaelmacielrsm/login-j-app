@@ -52,7 +52,6 @@ export default PasswordInput;
 
 const styles = StyleSheet.create({
   inputGroup: {
-    flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -75,23 +74,26 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     border: 0,
     padding: '0 8px',
-    boxShadow: '1px 2px 4px black',
+    boxShadow: '-1px 2px 4px black',
     borderRadius: '4px 0 0 4px',
     fontSize: 16,
     lineHeight: '26px',
+    height: '36px',
     '@media screen and (min-width: 320px)':{
-      fontSize: fluidValue(16,24),
-      lineHeight: fluidValue(26, 42),
+      fontSize: fluidValue(16,20),
+      lineHeight: fluidValue(26, 36),
+      height: fluidValue(36, 46),
     },
     '@media screen and (min-width: 768px)':{
-      fontSize: 24,
-      lineHeight: '42px',
+      fontSize: 20,
+      lineHeight: '36px',
+      height: '46px',
     },
   },
 
   svgIcon: {
     flexGrow: 0,
-    boxShadow: '1px 2px 4px black',
+    boxShadow: '-2px 4px 4px black',
     fill: colorPallet.textSecundary,
     stroke: colorPallet.textSecundary,
     borderRadius: '0 4px 4px 0',
@@ -100,10 +102,10 @@ const styles = StyleSheet.create({
     backgroundColor: colorPallet.secundary,
     zIndex: 1,
     '@media screen and (min-width: 320px)':{
-      height: fluidValue(36, 52),
+      height: fluidValue(36, 46),
     },
     '@media screen and (min-width: 768px)':{
-      height: '52px',
+      height: '46px',
     },
     ':hover': {
       cursor: 'pointer',

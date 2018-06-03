@@ -34,10 +34,10 @@ const styles = StyleSheet.create({
     text: 'val',
     bottom: 0,
     '@media screen and (min-width: 320px)':{
-      fontSize: fluidValue(16, 24),
+      fontSize: fluidValue(16, 20),
     },
     '@media screen and (min-width: 768px)':{
-      fontSize: '24px',
+      fontSize: '20px',
     },
   },
 
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: colorPallet.alert,
     color: colorPallet.textPrimary,
-    height: '52px',
+    height: '44px',
     position: 'fixed',
     bottom: '0',
     right: '0',
@@ -66,10 +66,20 @@ const styles = StyleSheet.create({
       cursor: 'pointer',
     },
     '@media screen and (min-width: 320px)':{
-      height: fluidValue(52, 64),
+      height: fluidValue(44, 56),
     },
     '@media screen and (min-width: 768px)':{
-      height: '64px',
+      height: '56px',
+    },
+    '@supports (grid-area: auto)': {
+      '@media screen and (min-width: 769px)': {
+        maxWidth: '43em',
+        width: 'auto',
+        margin: '0 auto',
+        position: 'fixed',
+        left: '0',
+        bottom: '0',
+      }
     },
     animationName: {
       'from': {

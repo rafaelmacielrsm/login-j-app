@@ -76,12 +76,12 @@ export const defaultButton = {
     backgroundColor: colorPallet.secundaryDark,
   },
   '@media screen and (min-width: 320px)':{
-    fontSize: fluidValue(16,24),
-    lineHeight: fluidValue(26, 42),
+    fontSize: fluidValue(16,20),
+    lineHeight: fluidValue(26, 36),
   },
   '@media screen and (min-width: 768px)':{
-    fontSize: 24,
-    lineHeight: '42px',
+    fontSize: 20,
+    lineHeight: '36px',
   },  
 };
 
@@ -110,5 +110,10 @@ export const primaryCard = {
     padding: '0.5em',
     color: colorPallet.textPrimary,
     backgroundColor: colorPallet.primary,
+    '@supports (grid-area: auto)': {
+      '@media screen and (min-width: 769px)': {
+        gridColumn: '2/6',
+      }
+    }
   },
 };

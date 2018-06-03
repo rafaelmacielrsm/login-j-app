@@ -3,6 +3,7 @@ import t from '../../config/locales';
 import { StyleSheet, css } from 'aphrodite';
 import Link from 'next/link';
 import { 
+  fluidValue,
   fadeInAnimation,
   colorPallet,
   defaultButton,
@@ -19,9 +20,17 @@ class UserProfile extends React.Component {
         </header>
 
         <section className={ css( styles.textSection )} >
-          <p><span>{ t( 'label.name' )}:</span> { name }</p>
-          <p><span>{ t( 'label.email' )}:</span> { email }</p>
-          <p><span>{ t( 'label.username' )}:</span> { username }</p>
+          <p className={ css( styles.paragraph )} >
+            <span>{ t( 'label.name' )}:</span> { name }
+          </p>
+          
+          <p className={ css( styles.paragraph )} >
+            <span>{ t( 'label.email' )}:</span> { email }
+          </p>
+
+          <p className={ css( styles.paragraph )} >
+            <span>{ t( 'label.username' )}:</span> { username }
+          </p>
         </section>
           
         <Link prefetch href='/user/edit'>
@@ -40,6 +49,23 @@ const styles = StyleSheet.create({
   textSection: {
     textAlign: 'left',
     width: '100%',
+  },
+
+  paragraph: {
+    backgroundColor: colorPallet.primaryLight,
+    border: '1px solid black',
+    borderRadius: '4px',
+    padding: '5px 5px',
+    fontSize: 16,
+    lineHeight: '26px',
+    '@media screen and (min-width: 320px)':{
+      fontSize: fluidValue(16,20),
+      lineHeight: fluidValue(26, 36),
+    },
+    '@media screen and (min-width: 768px)':{
+      fontSize: 20,
+      lineHeight: '36px',
+    },
   },
 
   fadeInAnimation: fadeInAnimation,

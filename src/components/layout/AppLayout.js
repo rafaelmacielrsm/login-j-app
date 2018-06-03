@@ -40,11 +40,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     '@supports (grid-area: auto)': {
-      '@media screen and (min-width: 5000px)': {
+      '@media screen and (min-width: 769px)': {
         display: 'grid',
-        gridTemplateColumns: '1fr repeat(4, calc(90%/6) ) 1fr',
-        gridColumnGap: 'calc(10%/5)',
-        backgroundColor: 'gray'
+        gridTemplateColumns: '1fr repeat(4, 10em ) 1fr',
+        gridColumnGap: '1em',
       }
     }
   },

@@ -1,5 +1,6 @@
 import { StyleSheet, css } from 'aphrodite';
 import PropTypes from 'prop-types';
+import { fluidValue } from '../assets/common';
 
 const FormLabel = ({ htmlFor, ...props }) => (
   <label 
@@ -15,7 +16,14 @@ const styles = StyleSheet.create({
     margin: 0,
     padding: 0,
     width: '100%',
-    textAlign: 'left'
+    textAlign: 'left',
+    fontSize: 16,
+    '@media screen and (min-width: 320px)':{
+      fontSize: fluidValue(16,20),
+    },
+    '@media screen and (min-width: 768px)':{
+      fontSize: 20,
+    },    
   },
 });
 

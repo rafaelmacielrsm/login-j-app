@@ -8,6 +8,7 @@ import DefaultInput from './shared/DefaultInput';
 import { replaceRouteAndCallback } from '../../helpers/routesHelpers';
 import PasswordInput from './shared/PasswordInput';
 import { 
+  fadeInAnimation,
   defaultButton, 
   primaryCard, 
   defaultLink,
@@ -86,7 +87,7 @@ class LoginForm extends React.Component {
   render() {
     const { errors, isValid, isRevealingPassord } = this.state;
     return (
-      <form className={ css(styles.loginForm) }>
+      <form className={ css( styles.loginForm, styles.fadeInAnimation ) }>
         <section className={ css( styles.heading )} >
           <h1 className={ css( styles.title )} >{ t( 'page.login.title' ) }</h1>
         </section>
@@ -144,6 +145,8 @@ const styles = StyleSheet.create({
   title: primaryCard.title,
 
   button: defaultButton,
+
+  fadeInAnimation,
 
   formActions: {
     alignSelf: 'stretch',

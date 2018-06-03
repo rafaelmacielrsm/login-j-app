@@ -21,16 +21,23 @@ class Menu extends React.Component {
   render() {
     const { isShowing } = this.state;
     return (
-      <nav className={ css( styles.navContainer )} >
-        <MenuIcon 
+      <nav className={ css( styles.navContainer )}>
+        <div 
           onClick={ () => this.handleMenuClick() }
-          className={ css( styles.svgIcon )} />
+          className={ css( styles.mobile )} >
 
-        { isShowing &&   
-          <div className={ css( styles.linkGroup )} >
-            <LogoutButton />
-          </div>
-        }
+          <MenuIcon className={ css( styles.svgIcon )} />
+
+          { isShowing &&   
+            <div className={ css( styles.linkGroup )} >
+              <LogoutButton />
+            </div>
+          }
+        </div>
+
+        <div className={ css( styles.largeScreen )}  >
+          <LogoutButton />
+        </div>
       </nav>
     );
   }
@@ -51,6 +58,29 @@ const styles = StyleSheet.create({
     boxSizing: 'border-box',
     borderBottom: `1px solid ${colorPallet.textSecundary}`,
     boxShadow: '1px 2px 4px black',
+  },
+
+  mobile: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    '@supports (grid-area: auto)': {
+      '@media screen and (min-width: 769px)': {
+        display: 'none',
+      }
+    }
+  },
+
+  largeScreen: {
+    display: 'none',
+    '@supports (grid-area: auto)': {
+      '@media screen and (min-width: 769px)': {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        padding: '0.25em 2em',
+      }
+    }
   },
 
   active: {
